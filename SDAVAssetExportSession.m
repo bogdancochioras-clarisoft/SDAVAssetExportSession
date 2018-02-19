@@ -317,6 +317,13 @@
 	if (transform.tx == -560) {
 		transform.tx = 0;
 	}
+    
+    // Add offset handling to account for https://github.com/rs/SDAVAssetExportSession/issues/79
+    CGRect rect = {{0, 0}, naturalSize};
+    CGRect transformedRect = CGRectApplyAffineTransform(rect, transform);
+    // transformedRect should have origin at 0 if correct; otherwise add offset to correct it
+    transform.tx -= transformedRect.origin.x;
+    transform.ty -= transformedRect.origin.y;
 
 	CGFloat videoAngleInDegree  = atan2(transform.b, transform.a) * 180 / M_PI;
 	if (videoAngleInDegree == 90 || videoAngleInDegree == -90) {
