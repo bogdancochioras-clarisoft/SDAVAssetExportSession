@@ -87,6 +87,14 @@
 @property (nonatomic, copy) NSDictionary *videoSettings;
 
 /**
+ * The desired frame rate for the output video
+ *
+ * Not all videos support the AVVideoAverageNonDroppableFrameRateKey in videoSettings compression settings
+ * This is an alternative way to set the frame rate
+ */
+@property (nonatomic) float videoFrameRate;
+
+/**
  * The settings used for encoding the audio track.
  *
  * A value of nil specifies that appended output should not be re-encoded.
