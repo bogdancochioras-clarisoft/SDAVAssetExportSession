@@ -293,6 +293,12 @@
             {
                 trackFrameRate = frameRate.floatValue;
             }
+            else {
+                trackFrameRate = [videoTrack nominalFrameRate];
+            }
+        }
+        else {
+            trackFrameRate = [videoTrack nominalFrameRate];
         }
     }
     else
