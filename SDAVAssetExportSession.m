@@ -299,7 +299,7 @@
             }
         }
     }
-    else if (self.videoFrameRate != 0)
+    else if (self.videoFrameRate == 0)
     {
         trackFrameRate = [videoTrack nominalFrameRate];
     }
