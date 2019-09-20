@@ -239,8 +239,12 @@
                 lastSamplePresentationTime = CMSampleBufferGetPresentationTimeStamp(sampleBuffer);
                 lastSamplePresentationTime = CMTimeSubtract(lastSamplePresentationTime, self.timeRange.start);
                 float lastSampleTime = CMTimeGetSeconds(lastSamplePresentationTime);
-                if (lastSampleTime != 0) {
-                    self.progress = duration == 0 ? 1 : lastSampleTime / duration;
+                @try {
+                    if (lastSampleTime != 0) {
+                        self.progress = duration == 0 ? 1 : lastSampleTime / duration;
+                    }
+                } @catch (NSException *e) {
+                    NSLog(@"SDASSetExportSession error: %@", e.reason);
                 }
 
                 if ([self.delegate respondsToSelector:@selector(exportSession:renderFrame:withPresentationTime:toBuffer:)])
