@@ -238,7 +238,10 @@
                 // update the video progress
                 lastSamplePresentationTime = CMSampleBufferGetPresentationTimeStamp(sampleBuffer);
                 lastSamplePresentationTime = CMTimeSubtract(lastSamplePresentationTime, self.timeRange.start);
-                self.progress = duration == 0 ? 1 : CMTimeGetSeconds(lastSamplePresentationTime) / duration;
+                float lastSampleTime = CMTimeGetSeconds(lastSamplePresentationTime);
+                if (lastSampleTime != 0) {
+                    self.progress = duration == 0 ? 1 : lastSampleTime / duration;
+                }
 
                 if ([self.delegate respondsToSelector:@selector(exportSession:renderFrame:withPresentationTime:toBuffer:)])
                 {
